@@ -46,33 +46,33 @@ GET {{BASE_URL}}/api/products HTTP/1.1
 
 ### Listar materias de un alumno específico
 ### GET {{BASE_URL}}/api/alumnos/456789/materias HTTP/1.1
-### Crear nuevo alumno
-POST {{BASE_URL}}/products/123456 HTTP/1.1
+### Crear nuevo producto
+POST {{BASE_URL}}/api/products HTTP/1.1
 Content-Type: application/json
 
 {
-  "productId": 123456,
-  "name": "Juan Perez",
-  "description": "juan.perez@correo.com",
-  "price": 70000
+  "productId": 10,
+  "name": "Hulk",
+  "description": "SMASH!",
+  "price": 120000
 }
 
 ### Matricular un alumno en una materia
 ### POST {{BASE_URL}}/api/alumnos/456789/materias/2 HTTP/1.1
 
 ### Actualizar un alumno existente
-PUT {{BASE_URL}}/api/products/123456 HTTP/1.1
+PUT {{BASE_URL}}/api/products/10 HTTP/1.1
 Content-Type: application/json
 
 {
-  "nombre": "Juan Perez Actualizado",
-  "email": "juan.perez@actualizado.com"
+  "description": "SMASHED AND UPDATED!",
+  "price": "110000"
 }
 
-### Eliminar un alumno existente
-DELETE {{BASE_URL}}/api/alumnos/987654 HTTP/1.1
+### Eliminar un  existente
+DELETE {{BASE_URL}}/api/products/10 HTTP/1.1
 ### Eliminar un alumno de una materia
-DELETE {{BASE_URL}}/api/alumnos/123456/materias/2 HTTP/1.1
+### DELETE {{BASE_URL}}/api/alumnos/123456/materias/2 HTTP/1.1
 
 ### ============ MATERIA ENDPOINTS ============
 
