@@ -1,4 +1,6 @@
 -- Creación de la base de datos
+COMMENT ON DATABASE postgres IS 'This database was created by: Daimer. Docker files by Santiago. In collaboration with our team members Ricardo and Danny';
+
 CREATE DATABASE ecommerce_final;
 
 -- Creación de la tabla Roles
@@ -8,7 +10,7 @@ CREATE TABLE Roles (
 );
 
 -- Creación de la tabla User
-CREATE TABLE "User" (
+CREATE TABLE Users (
     UniqueID SERIAL PRIMARY KEY,
     username VARCHAR(50) NOT NULL UNIQUE,
     email VARCHAR(100) NOT NULL UNIQUE,
@@ -22,7 +24,6 @@ CREATE TABLE Products (
     ProductId SERIAL PRIMARY KEY,
     name VARCHAR(200) NOT NULL,
     description TEXT,
-    img VARCHAR(500),
     price DECIMAL(10,2) NOT NULL
 );
 
@@ -33,8 +34,8 @@ CREATE TABLE DeliveryAddress (
     address TEXT NOT NULL,
     zipcode VARCHAR(20),
     phoneNumber VARCHAR(20),
-    description TEXT,
-    CONSTRAINT FK_DeliveryAddress_User FOREIGN KEY (UserId) REFERENCES "User"(UniqueID)
+    description VARCHAR(100),
+    CONSTRAINT FK_DeliveryAddress_User FOREIGN KEY (UserId) REFERENCES Users(UniqueID)
 );
 
 -- Creación de la tabla Cart

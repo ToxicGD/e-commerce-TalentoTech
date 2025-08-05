@@ -1,0 +1,38 @@
+services:
+  db:
+    image: postgres
+    platform: linux/amd64   # Keep this line
+    restart: always
+    shm_size: 128mb
+    volumes:
+      - ./db/resources/:/docker-entrypoint-initdb.d/
+      - data:/var/lib/postgresql/data
+    env_file:
+      - ./db/.env
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U administrador"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  adminer:
+    image: adminer
+    platform: linux/amd64   # Keep this line
+    restart: always
+    ports:
+      - 8081:8080
+
+  backend:
+    build:
+      context: ./api_rest
+      dockerfile: Dockerfile
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - 8080:8080
+    env_file:
+      - ./api_rest/.env
+
+volumes:
+  data:

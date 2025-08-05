@@ -1,0 +1,18 @@
+{
+    "recommendations": [
+        "ms-azuretools.vscode-containers",
+        "humao.rest-client",
+        "vmware.vscode-spring-boot",
+        "vscjava.vscode-java-debug",
+        "vscjava.vscode-gradle",
+        "visualstudioexptteam.vscodeintellicode",
+        "visualstudioexptteam.intellicode-api-usage-examples",
+        "redhat.java",
+        "vscjava.vscode-maven",
+        "vscjava.vscode-java-dependency",
+        "vscjava.vscode-spring-boot-dashboard",
+        "vmware.vscode-boot-dev-pack",
+        "vscjava.vscode-spring-initializr",
+        "vscjava.vscode-java-test"
+    ]
+}
