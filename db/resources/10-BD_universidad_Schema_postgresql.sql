@@ -33,9 +33,8 @@ CREATE TABLE delivery (
     deliveryid SERIAL PRIMARY KEY,
     userid INTEGER NOT NULL,
     address TEXT NOT NULL,
-    zipcode VARCHAR(20),
-    phoneNumber VARCHAR(20),
-    description VARCHAR(100),
+    zipcode INTEGER,
+    phonenumber VARCHAR(20),
     CONSTRAINT FK_DeliveryAddress_User FOREIGN KEY (userid) REFERENCES users(uniqueid)
 );
 

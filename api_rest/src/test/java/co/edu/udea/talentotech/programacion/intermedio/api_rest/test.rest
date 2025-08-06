@@ -45,9 +45,10 @@ GET {{BASE_URL}}/api/products HTTP/1.1
 
 ### Listar todos los usuarios
 GET {{BASE_URL}}/users HTTP/1.1
+### Listar todos los deliveries
+GET {{BASE_URL}}/delivery HTTP/1.1
 
-### Listar materias de un alumno específico
-### GET {{BASE_URL}}/api/alumnos/456789/materias HTTP/1.1
+
 ### Crear nuevo producto
 POST {{BASE_URL}}/api/products HTTP/1.1
 Content-Type: application/json
@@ -70,6 +71,17 @@ Content-Type: application/json
   "password": "dickXXX69",
   "roleId": 2
 }
+
+### Crear nuevo delivery
+POST {{BASE_URL}}/delivery HTTP/1.1
+Content-Type: application/json
+
+{
+  "userId": 1,
+  "address": "Carrera 50X 70 61, Prado, Medellín",
+  "zipCode": 50032,
+  "phoneNumber": "3154129040"
+}
 ### Actualizar un producto existente
 PUT {{BASE_URL}}/api/products/10 HTTP/1.1
 Content-Type: application/json
@@ -79,16 +91,27 @@ Content-Type: application/json
   "price": "50000"
 }
 ### Actualizar un usuario existente
-PUT {{BASE_URL}}/users/4 HTTP/1.1
+PUT {{BASE_URL}}/users/1 HTTP/1.1
 Content-Type: application/json
 
 {
   "name": "Gaygaroto Vegito"
 }
+### Actualizar un delivery existente
+PUT {{BASE_URL}}/delivery/1 HTTP/1.1
+Content-Type: application/json
+
+{
+  "userId": 1,
+  "address": "Carrera 50X 70 61, ACTUALIZADO, Medellín",
+  "phoneNumber": "3104129040"
+}
 ### Eliminar un producto existente
 DELETE {{BASE_URL}}/api/products/10 HTTP/1.1
 ### Eliminar un producto existente
 DELETE {{BASE_URL}}/users/5 HTTP/1.1
+### Eliminar un delivery existente
+DELETE {{BASE_URL}}/delivery/1 HTTP/1.1
 ### Eliminar un alumno de una materia
 ### DELETE {{BASE_URL}}/api/alumnos/123456/materias/2 HTTP/1.1
 

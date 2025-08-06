@@ -17,9 +17,9 @@ VALUES
   ('Zelda', 'The eversearching princess from The Legend of Zelda, finally found.', 64400),
   ('Lilith Borderlands', 'Does she need an introduction?', 35700);
 
-INSERT INTO delivery (userid, address, zipcode, phonenumber, description) 
+INSERT INTO delivery (userid, address, zipcode, phonenumber) 
 VALUES 
-  (1, 'Carrera Prueba 1 00 - 00', '00000', '6040000000', 'N/A'),
-  (2, 'Carrera Prueba 2 00 - 00', '00000', '6040000001', 'N/A'),
-  (3, 'Carrera Prueba 3 00 - 00', '00000', '6040000002', 'N/A'),
-  (4, 'Carrera Prueba 4 00 - 00', '00000', '6040000003', 'N/A');
+  (1, 'Carrera Prueba 1 00 - 00', 000001, '6040000000'),
+  (2, 'Carrera Prueba 2 00 - 00', 000002, '6040000001'),
+  (3, 'Carrera Prueba 3 00 - 00', 000003, '6040000002'),
+  (4, 'Carrera Prueba 4 00 - 00', 000004, '6040000003');
