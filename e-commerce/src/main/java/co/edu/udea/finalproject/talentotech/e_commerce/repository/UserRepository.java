@@ -1,4 +1,4 @@
-package co.edu.udea.finalproject.talentotech.e_commerce.controller;
+package co.edu.udea.finalproject.talentotech.e_commerce.repository;
 
 public class UserRepository {
 
