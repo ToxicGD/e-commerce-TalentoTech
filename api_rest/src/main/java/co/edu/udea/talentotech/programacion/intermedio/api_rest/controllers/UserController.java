@@ -24,9 +24,11 @@ public class UserController {
     public UserDTO createUser(@RequestBody UserDTO entity) {
         System.out.println("Received entity: " + entity);
         User newUser = new User(
+                entity.getUsername(),
                 entity.getName(),
                 entity.getEmail(),
-                entity.getAge());
+                entity.getPassword(),
+                entity.getRoleId());
         users.add(newUser);
         System.out.println("Created user: " + newUser);
         UserDTO newUserDTO = new UserDTO(newUser);
@@ -77,9 +79,11 @@ public class UserController {
                 .filter(user -> user.getId() == id)
                 .findFirst()
                 .orElseThrow(() -> new IllegalArgumentException("User not found with ID: " + id));
+        reUset.setUsername(entity.getUsername());
         reUset.setName(entity.getName());
         reUset.setEmail(entity.getEmail());
-        reUset.setAge(entity.getAge());
+        reUset.setPassword(entity.getPassword());
+        reUset.setRoleId(entity.getRoleId());
         return new UserDTO(reUset);
     }
 

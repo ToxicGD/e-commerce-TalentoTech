@@ -7,58 +7,64 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import co.edu.udea.talentotech.programacion.intermedio.api_rest.dto.ProductDTO;
-import co.edu.udea.talentotech.programacion.intermedio.api_rest.entities.Product;
-import co.edu.udea.talentotech.programacion.intermedio.api_rest.repositories.ProductRepository;
-import co.edu.udea.talentotech.programacion.intermedio.api_rest.services.ProductService;
+import co.edu.udea.talentotech.programacion.intermedio.api_rest.dto.UserDTO;
+import co.edu.udea.talentotech.programacion.intermedio.api_rest.entities.User;
+import co.edu.udea.talentotech.programacion.intermedio.api_rest.repositories.UserRepository;
+import co.edu.udea.talentotech.programacion.intermedio.api_rest.services.UserService;
 
 @Service
-public class ProductServiceImpl implements ProductService {
+public class UserServiceImpl implements UserService {
 
     @Autowired
-    private ProductRepository productRepository;
+    private UserRepository userRepository;
 
     @Transactional(readOnly = true)  //begin - commit en sql
     @Override
-    public List<ProductDTO> findAll() {
-        List<Product> all = (List<Product>) productRepository.findAll();
+    public List<UserDTO> findAll() {
+        List<User> all = (List<User>) userRepository.findAll();
         return all.stream().map(this::convertToDTO).collect(Collectors.toList());
     }
 
     @Transactional
     @Override
-    public ProductDTO save(ProductDTO productDTO) {
-        Product product = convertToEntity(productDTO);
-        Product savedAlumno = productRepository.save(product);
-        return convertToDTO(savedAlumno);
+    public UserDTO save(UserDTO userDTO) {
+        User user = convertToEntity(userDTO);
+        User savedUser = userRepository.save(user);
+        return convertToDTO(savedUser);
     }
 
     @Transactional
     @Override
-    public ProductDTO update(Integer id, ProductDTO productDTO) {
-        Product product = productRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException(" not found with id: " + id));
+    public UserDTO update(Integer id, UserDTO userDTO) {
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("User not found with id: " + id));
         // Update fields
-        if (productDTO.getProductId() != null) {
-            product.setProductId(productDTO.getProductId());
+        if (userDTO.getId() != null) {
+            user.setId(userDTO.getId());
         }
-        if (productDTO.getName() != null) {
-            product.setName(productDTO.getName());
+        if (userDTO.getUsername() != null) {
+            user.setUsername(userDTO.getUsername());
         }
-        if (productDTO.getDescription() != null) {
-            product.setDescription(productDTO.getDescription());
+        if (userDTO.getName() != null) {
+            user.setName(userDTO.getName());
         }
-        if (productDTO.getPrice() != 0) {
-            product.setPrice(productDTO.getPrice());
+        if (userDTO.getEmail() != null) {
+            user.setEmail(userDTO.getEmail());
         }
-        Product updatedProduct = productRepository.save(product);
-        return convertToDTO(updatedProduct);
+        if (userDTO.getPassword() != null) {
+            user.setPassword(userDTO.getPassword());
+        }
+        if (userDTO.getRoleId() == 1 || userDTO.getRoleId() == 2) {
+            user.setRoleId(userDTO.getRoleId());
+        }
+        User updatedUser = userRepository.save(user);
+        return convertToDTO(updatedUser);
     }
 
     @Transactional
     @Override
     public void delete(Integer id) {
-        productRepository.deleteById(id);
+        userRepository.deleteById(id);
     }
 
     /*@Transactional
@@ -94,16 +100,18 @@ public class ProductServiceImpl implements ProductService {
                 .collect(Collectors.toList());
     }*/
 
-    private ProductDTO convertToDTO(Product product) {
-        return new ProductDTO(product);
+    private UserDTO convertToDTO(User user) {
+        return new UserDTO(user);
     }
 
-    private Product convertToEntity(ProductDTO productDTO) {
-        Product product =  new Product();
-        product.setProductId(productDTO.getProductId());
-        product.setName(productDTO.getName());
-        product.setDescription(productDTO.getDescription());
-        product.setPrice(productDTO.getPrice());
-        return product;
+    private User convertToEntity(UserDTO userDTO) {
+        User user =  new User();
+        user.setId(userDTO.getId());
+        user.setUsername(userDTO.getUsername());
+        user.setName(userDTO.getName());
+        user.setEmail(userDTO.getEmail());
+        user.setPassword(userDTO.getPassword());
+        user.setRoleId(userDTO.getRoleId());
+        return user;
     }
 }

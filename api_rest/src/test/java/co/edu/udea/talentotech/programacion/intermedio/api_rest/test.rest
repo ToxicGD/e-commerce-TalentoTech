@@ -43,6 +43,8 @@ DELETE {{BASE_URL}}/users/2 HTTP/1.1
 ### Listar todos los productos
 GET {{BASE_URL}}/api/products HTTP/1.1
 
+### Listar todos los usuarios
+GET {{BASE_URL}}/users HTTP/1.1
 
 ### Listar materias de un alumno específico
 ### GET {{BASE_URL}}/api/alumnos/456789/materias HTTP/1.1
@@ -57,20 +59,36 @@ Content-Type: application/json
   "price": 120000
 }
 
-### Matricular un alumno en una materia
-### POST {{BASE_URL}}/api/alumnos/456789/materias/2 HTTP/1.1
+### Crear nuevo usuario
+POST {{BASE_URL}}/users HTTP/1.1
+Content-Type: application/json
 
-### Actualizar un alumno existente
+{
+  "username": "Rubia69",
+  "name": "Kakaroto Vegito",
+  "email": "vicioso48@yahoo.com",
+  "password": "dickXXX69",
+  "roleId": 2
+}
+### Actualizar un producto existente
 PUT {{BASE_URL}}/api/products/10 HTTP/1.1
 Content-Type: application/json
 
 {
   "description": "SMASHED AND UPDATED!",
-  "price": "110000"
+  "price": "50000"
 }
+### Actualizar un usuario existente
+PUT {{BASE_URL}}/users/4 HTTP/1.1
+Content-Type: application/json
 
-### Eliminar un  existente
+{
+  "name": "Gaygaroto Vegito"
+}
+### Eliminar un producto existente
 DELETE {{BASE_URL}}/api/products/10 HTTP/1.1
+### Eliminar un producto existente
+DELETE {{BASE_URL}}/users/5 HTTP/1.1
 ### Eliminar un alumno de una materia
 ### DELETE {{BASE_URL}}/api/alumnos/123456/materias/2 HTTP/1.1
 

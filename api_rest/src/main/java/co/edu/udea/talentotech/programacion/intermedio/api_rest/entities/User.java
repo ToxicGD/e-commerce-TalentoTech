@@ -18,24 +18,51 @@ public class User {
 
     // @NotBlank
     @Size(max = 50)
+    @Column(name = "username", nullable = false)
+    private String username;
+
+    @Size(max=100)
     @Column(name = "name", nullable = false)
     private String name;
+
+    @Size(max=100)
+    @Column(name = "email", nullable = false, unique = true)
     private String email;
-    private int age;
+
+    @Size(max=50)
+    @Column(name = "password", nullable = false)
+    private String password;
+
+    @Column(name = "role_id", nullable = false)
+    private int roleId;
 
     public User() {
         this.id = ++idCounter;
     }
 
-    public User(String name, String email, int age) {
+    public User(String username, String name, String email, String password, int roleId) {
         this.id = ++idCounter;
+        this.username = username;
         this.name = name;
         this.email = email;
-        this.age = age;
+        this.password = password;
+        this.roleId = roleId;
     }
 
     public int getId() {
         return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getName() {
@@ -54,16 +81,24 @@ public class User {
         this.email = email;
     }
 
-    public int getAge() {
-        return age;
+    public String getPassword() {
+        return password;
     }
 
-    public void setAge(int age) {
-        this.age = age;
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public int getRoleId() {
+        return roleId;
+    }
+
+    public void setRoleId(int roleId) {
+        this.roleId = roleId;
     }
 
     @Override
     public String toString() {
-        return "User [id=" + id + ", name=" + name + ", email=" + email + ", age=" + age + "]";
+        return "User [id=" + id + ", username=" + username + ", name=" + name + ", email=" + email + ", password=" + password + ", roleid=" + roleId + "]";
     }   
 }

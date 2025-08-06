@@ -3,9 +3,7 @@ package co.edu.udea.talentotech.programacion.intermedio.api_rest.controllers;
 import org.springframework.web.bind.annotation.RestController;
 
 import co.edu.udea.talentotech.programacion.intermedio.api_rest.dto.ProductDTO;
-//import co.edu.udea.talentotech.programacion.intermedio.api_rest.dto.MateriaDTO;
 import co.edu.udea.talentotech.programacion.intermedio.api_rest.services.ProductService;
-import co.edu.udea.talentotech.programacion.intermedio.api_rest.services.impl.ProductServiceImpl;
 
 import java.util.List;
 

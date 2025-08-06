@@ -4,31 +4,38 @@ import co.edu.udea.talentotech.programacion.intermedio.api_rest.entities.User;
 
 public class UserDTO {
     private Integer id;
+    private String username;
     private String name;
     private String email;
-    private int age;
+    private String password;
+    private int roleId;
 
     public UserDTO() {
     }
 
-    public UserDTO(String name, String email, int age) {
+    public UserDTO(String username, String name, String email, String password, int roleId) {
+        this.username = username;
         this.name = name;
         this.email = email;
-        this.age = age;
+        this.password = password;
+        this.roleId = roleId;
     }
 
-    public UserDTO(Integer id, String name, String email, int age) {
+    public UserDTO(Integer id, String username, String name, String email, String password, int roleId) {
         this.id = id;
         this.name = name;
         this.email = email;
-        this.age = age;
+        this.password = password;
+        this.roleId = roleId;
     }
 
     public UserDTO(User user) {
         this.id = user.getId();
+        this.username = user.getUsername();
         this.name = user.getName();
         this.email = user.getEmail();
-        this.age = user.getAge();
+        this.password = user.getPassword();
+        this.roleId = user.getRoleId();
     }
 
     public Integer getId() {
@@ -37,6 +44,14 @@ public class UserDTO {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getName() {
@@ -55,12 +70,21 @@ public class UserDTO {
         this.email = email;
     }
 
-    public int getAge() {
-        return age;
+    public String getPassword() {
+        return password;
     }
 
-    public void setAge(int age) {
-        this.age = age;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
+    public int getRoleId() {
+        return roleId;
+    }
+
+    public void setRoleId(int roleId) {
+        this.roleId = roleId;
+    }
+
+    
 }

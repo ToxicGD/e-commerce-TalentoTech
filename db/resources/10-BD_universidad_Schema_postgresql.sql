@@ -4,58 +4,59 @@ COMMENT ON DATABASE postgres IS 'This database was created by: Daimer. Docker fi
 CREATE DATABASE ecommerce_final;
 
 -- Creación de la tabla Roles
-CREATE TABLE Roles (
-    RoleId SERIAL PRIMARY KEY,
-    role_Name VARCHAR(100) NOT NULL
+CREATE TABLE roles (
+    roleid SERIAL PRIMARY KEY,
+    rolename VARCHAR(100) NOT NULL
 );
 
 -- Creación de la tabla User
-CREATE TABLE Users (
-    UniqueID SERIAL PRIMARY KEY,
+CREATE TABLE users (
+    uniqueid SERIAL PRIMARY KEY,
     username VARCHAR(50) NOT NULL UNIQUE,
+    name VARCHAR(100) NOT NULL,
     email VARCHAR(100) NOT NULL UNIQUE,
-    password VARCHAR(255) NOT NULL,
-    RoleId INTEGER NOT NULL,
-    CONSTRAINT FK_User_Role FOREIGN KEY (RoleId) REFERENCES Roles(RoleId)
+    password VARCHAR(50) NOT NULL,
+    roleid INTEGER NOT NULL,
+    CONSTRAINT FK_User_Role FOREIGN KEY (roleid) REFERENCES roles(roleid)
 );
 
 -- Creación de la tabla Products
-CREATE TABLE Products (
-    ProductId SERIAL PRIMARY KEY,
+CREATE TABLE products (
+    productid SERIAL PRIMARY KEY,
     name VARCHAR(200) NOT NULL,
     description TEXT,
     price DECIMAL(10,2) NOT NULL
 );
 
 -- Creación de la tabla DeliveryAddress
-CREATE TABLE DeliveryAddress (
-    DeliveryID SERIAL PRIMARY KEY,
-    UserId INTEGER NOT NULL,
+CREATE TABLE delivery (
+    deliveryid SERIAL PRIMARY KEY,
+    userid INTEGER NOT NULL,
     address TEXT NOT NULL,
     zipcode VARCHAR(20),
     phoneNumber VARCHAR(20),
     description VARCHAR(100),
-    CONSTRAINT FK_DeliveryAddress_User FOREIGN KEY (UserId) REFERENCES Users(UniqueID)
+    CONSTRAINT FK_DeliveryAddress_User FOREIGN KEY (userid) REFERENCES users(uniqueid)
 );
 
 -- Creación de la tabla Cart
-CREATE TABLE Cart (
-    CartId SERIAL PRIMARY KEY,
-    productId INTEGER NOT NULL,
+CREATE TABLE cart (
+    cartid SERIAL PRIMARY KEY,
+    productid INTEGER NOT NULL,
     subtotal DECIMAL(10,2) NOT NULL,
     quantity INTEGER NOT NULL,
-    CONSTRAINT FK_Cart_Product FOREIGN KEY (productId) REFERENCES Products(ProductId)
+    CONSTRAINT FK_Cart_Product FOREIGN KEY (productid) REFERENCES products(productid)
 );
 
 -- Creación de la tabla Orders
-CREATE TABLE Orders (
-    OrderId SERIAL PRIMARY KEY,
-    ProductId INTEGER NOT NULL,
-    CartId INTEGER NOT NULL,
-    DeliveryID INTEGER NOT NULL,
-    orderDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    estimatedDeliveryDate DATE,
-    CONSTRAINT FK_Orders_Product FOREIGN KEY (ProductId) REFERENCES Products(ProductId),
-    CONSTRAINT FK_Orders_Cart FOREIGN KEY (CartId) REFERENCES Cart(CartId),
-    CONSTRAINT FK_Orders_Delivery FOREIGN KEY (DeliveryID) REFERENCES DeliveryAddress(DeliveryID)
+CREATE TABLE orders (
+    orderid SERIAL PRIMARY KEY,
+    productid INTEGER NOT NULL,
+    cartid INTEGER NOT NULL,
+    deliveryid INTEGER NOT NULL,
+    orderdate TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    estimateddeliverydate DATE,
+    CONSTRAINT FK_Orders_Product FOREIGN KEY (productId) REFERENCES products(productId),
+    CONSTRAINT FK_Orders_Cart FOREIGN KEY (cartid) REFERENCES cart(cartid),
+    CONSTRAINT FK_Orders_Delivery FOREIGN KEY (deliveryid) REFERENCES delivery(deliveryid)
 );

@@ -1,12 +1,6 @@
 package co.edu.udea.talentotech.programacion.intermedio.api_rest.entities;
 
-import java.util.Set;
-
 import jakarta.persistence.*;
-// import jakarta.validation.constraints.NotBlank;
-// import jakarta.validation.constraints.NotNull;
-// import jakarta.validation.constraints.Size;
-// import java.util.Set;
 import jakarta.validation.constraints.Size;
 
 @Entity
