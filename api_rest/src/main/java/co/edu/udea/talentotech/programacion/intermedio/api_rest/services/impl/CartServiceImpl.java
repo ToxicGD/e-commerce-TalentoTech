@@ -94,6 +94,7 @@ public class CartServiceImpl implements CartService {
             BigDecimal subTotal = productPrice.multiply(quantity);
 
             Cart newCart = new Cart();
+            newCart.setUserId(cartDTO.getUserId());
             newCart.setProductId(item.getProductId());
             newCart.setQuantity(item.getQuantity());
             newCart.setSubTotal(subTotal);
@@ -103,6 +104,14 @@ public class CartServiceImpl implements CartService {
         }
 
         return savedItems;
+    }
+
+    @Override
+    public List<CartDTO> findByUserId(Integer userId) {
+        List<Cart> carts = cartRepository.findByUserId(userId);
+        return carts.stream()
+            .map(this::convertToDTO)
+            .collect(Collectors.toList());
     }
     
     /**
@@ -118,6 +127,7 @@ public class CartServiceImpl implements CartService {
         itemList.add(item);
 
         CartDTO dto = new CartDTO();
+        dto.setUserId(cart.getUserId());
         dto.setCartId(cart.getCartId());
         dto.setItems(itemList);
 

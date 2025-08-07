@@ -30,6 +30,11 @@ public class CartController {
         return new ResponseEntity<>(carts, HttpStatus.OK);
     }
 
+    @GetMapping("/user/{userId}")
+    public ResponseEntity<List<CartDTO>> getCartsByUserId(@PathVariable Integer userId) {
+        return ResponseEntity.ok(cartService.findByUserId(userId));
+    }
+
     // Endpoint for updating an existing cart item by its ID
     @PutMapping("/{id}")
     public ResponseEntity<CartDTO> updateCart(@PathVariable Integer id, @RequestBody CartDTO cartDTO) {

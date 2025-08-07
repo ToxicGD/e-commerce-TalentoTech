@@ -8,7 +8,6 @@ public interface CartService {
     CartDTO save(CartDTO cartDTO);
     CartDTO update(Integer id, CartDTO cartDTO);
     void delete(Integer id);
-
-    // 🔧 ADD THIS:
     List<CartDTO> saveAll(CartDTO cartDTO);
+    List<CartDTO> findByUserId(Integer userId);
 }

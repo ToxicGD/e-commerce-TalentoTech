@@ -9,6 +9,9 @@ public class CartDTO {
     private Integer cartId; // Optional, or can be removed entirely
 
     @NotNull
+    private Integer userId;
+
+    @NotNull
     private List<CartItemDTO> items;
 
     public CartDTO() {}
@@ -17,6 +20,14 @@ public class CartDTO {
         this.items = items;
     }
 
+    public Integer getUserId() {
+    return userId;
+}
+
+    public void setUserId(Integer userId) {
+    this.userId = userId;
+}
+    
     public Integer getCartId() {
         return cartId;
     }

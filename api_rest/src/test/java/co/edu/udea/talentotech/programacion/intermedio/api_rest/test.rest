@@ -17,6 +17,8 @@ GET {{BASE_URL}}/users HTTP/1.1
 GET {{BASE_URL}}/delivery HTTP/1.1
 ### Listar todos los carritos
 GET {{BASE_URL}}/api/cart HTTP/1.1
+### Listar los carritos de un usuario específico
+GET {{BASE_URL}}/api/cart/user/1 HTTP/1.1
 
 ### Crear nuevo producto
 POST {{BASE_URL}}/api/products HTTP/1.1
@@ -56,14 +58,19 @@ POST {{BASE_URL}}/api/cart HTTP/1.1
 Content-Type: application/json
 
 {
+  "userId": 1,
   "items": [
     {
-      "productId": 2,
-      "quantity": 4
+      "productId": 1,
+      "quantity": 1
     },
     {
-      "productId": 1,
-      "quantity": 2
+      "productId": 2,
+      "quantity": 3
+    },
+    {
+      "productId": 3,
+      "quantity": 5
     }
   ]
 }
@@ -92,14 +99,15 @@ Content-Type: application/json
   "phoneNumber": "3104129040"
 }
 ### Actualizar un carrito existente
-PUT {{BASE_URL}}/api/cart/36 HTTP/1.1
+PUT {{BASE_URL}}/api/cart/6 HTTP/1.1
 Content-Type: application/json
 
 {
+  "userId": 1,
   "items": [
     {
-      "productId": 3,
-      "quantity": 10
+      "productId": 4,
+      "quantity": 1
     }
   ]
 }

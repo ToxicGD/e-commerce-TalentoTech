@@ -13,6 +13,9 @@ public class Cart {
     @Column(name = "cartid")
     private Integer cartId;
 
+    @Column(name = "userid", nullable = false)
+    private Integer userId;
+
     @Column(name = "productid", nullable = false)
     private Integer productId;
 
@@ -33,6 +36,14 @@ public class Cart {
     public void setCartId(Integer cartId) {
         this.cartId = cartId;
     }
+
+    public Integer getUserId() {
+    return userId;
+}
+
+    public void setUserId(Integer userId) {
+    this.userId = userId;
+}
 
     public Integer getProductId() {
         return productId;

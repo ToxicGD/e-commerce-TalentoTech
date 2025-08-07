@@ -41,19 +41,11 @@ CREATE TABLE delivery (
 -- Creación de la tabla Cart
 CREATE TABLE cart (
     cartid SERIAL PRIMARY KEY,
+    userid INTEGER NOT NULL,
     productid INTEGER NOT NULL,
     subtotal DECIMAL(10,2) NOT NULL,
     quantity INTEGER NOT NULL,
-    CONSTRAINT FK_Cart_Product FOREIGN KEY (productid) REFERENCES products(productid)
-);
-
--- Creación de la tabla Orders
-CREATE TABLE orders (
-    orderid SERIAL PRIMARY KEY,
-    cartid INTEGER NOT NULL,
-    deliveryid INTEGER NOT NULL,
     orderdate TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    CONSTRAINT FK_Orders_Product FOREIGN KEY (productId) REFERENCES products(productId),
-    CONSTRAINT FK_Orders_Cart FOREIGN KEY (cartid) REFERENCES cart(cartid),
-    CONSTRAINT FK_Orders_Delivery FOREIGN KEY (deliveryid) REFERENCES delivery(deliveryid)
+    CONSTRAINT FK_Cart_Product FOREIGN KEY (productid) REFERENCES products(productid),
+    CONSTRAINT FK_Cart_User FOREIGN KEY (userid) REFERENCES users(uniqueid)
 );
