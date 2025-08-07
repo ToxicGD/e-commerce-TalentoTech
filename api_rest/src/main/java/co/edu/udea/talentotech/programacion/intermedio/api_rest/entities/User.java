@@ -25,6 +25,10 @@ public class User {
     @Column(name = "name", nullable = false)
     private String name;
 
+    @Size(max=500)
+    @Column(name = "address", nullable = false)
+    private String address;
+
     @Size(max=100)
     @Column(name = "email", nullable = false, unique = true)
     private String email;
@@ -40,10 +44,11 @@ public class User {
         this.id = ++idCounter;
     }
 
-    public User(String username, String name, String email, String password, int roleId) {
+    public User(String username, String name, String address, String email, String password, int roleId) {
         this.id = ++idCounter;
         this.username = username;
         this.name = name;
+        this.address = address;
         this.email = email;
         this.password = password;
         this.roleId = roleId;
@@ -71,6 +76,14 @@ public class User {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public String getEmail() {

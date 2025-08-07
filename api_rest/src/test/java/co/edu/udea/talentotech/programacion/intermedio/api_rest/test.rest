@@ -38,6 +38,7 @@ Content-Type: application/json
 {
   "username": "Rubia69",
   "name": "Kakaroto Vegito",
+  "address": "Some Address 102401 A 20 20, Some City",
   "email": "vicioso48@yahoo.com",
   "password": "dickXXX69",
   "roleId": 2

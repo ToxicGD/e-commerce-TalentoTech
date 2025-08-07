@@ -26,6 +26,7 @@ public class UserController {
         User newUser = new User(
                 entity.getUsername(),
                 entity.getName(),
+                entity.getAddress(),
                 entity.getEmail(),
                 entity.getPassword(),
                 entity.getRoleId());
@@ -81,6 +82,7 @@ public class UserController {
                 .orElseThrow(() -> new IllegalArgumentException("User not found with ID: " + id));
         reUset.setUsername(entity.getUsername());
         reUset.setName(entity.getName());
+        reUset.setAddress(entity.getAddress());
         reUset.setEmail(entity.getEmail());
         reUset.setPassword(entity.getPassword());
         reUset.setRoleId(entity.getRoleId());

@@ -3,12 +3,12 @@
 
 INSERT INTO roles (rolename) VALUES ('Customer'), ('Admin');
 
-INSERT INTO users (username, name, email, password, roleid) 
+INSERT INTO users (username, name, address, email, password, roleid) 
 VALUES 
-  ('donCharro', 'Ricardo Melo', 'evaristoguti68@une.net.co', '123456789riguez', 1),
-  ('fuego_420', 'Julian Andres Rosero Zapata', 'molotovganja@yahoo.com', '09876543Garcia', 1),
-  ('marraneoperfido24', 'Giovanni Rodríguez','gold_member_69@hotmail.com', 'ABCDEFGLopez', 2),
-  ('anita_the_best99', 'Ana Ortiz', 'anita_the_Best99@gmail.com', 'LGRCSREZRuiz', 1);
+  ('donCharro', 'Ricardo Melo', 'Carrera Prueba 1 00 - 00', 'evaristoguti68@une.net.co', '123456789riguez', 1),
+  ('fuego_420', 'Julian Andres Rosero Zapata', 'Carrera Prueba 1 00 - 00', 'molotovganja@yahoo.com', '09876543Garcia', 1),
+  ('marraneoperfido24', 'Giovanni Rodríguez', 'Carrera Prueba 1 00 - 00','gold_member_69@hotmail.com', 'ABCDEFGLopez', 2),
+  ('anita_the_best99', 'Ana Ortiz', 'Carrera Prueba 1 00 - 00', 'anita_the_Best99@gmail.com', 'LGRCSREZRuiz', 1);
 
 INSERT INTO products (name, description, price) 
 VALUES 

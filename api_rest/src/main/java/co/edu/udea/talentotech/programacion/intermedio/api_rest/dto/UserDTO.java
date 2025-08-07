@@ -6,6 +6,7 @@ public class UserDTO {
     private Integer id;
     private String username;
     private String name;
+    private String address;
     private String email;
     private String password;
     private int roleId;
@@ -13,17 +14,19 @@ public class UserDTO {
     public UserDTO() {
     }
 
-    public UserDTO(String username, String name, String email, String password, int roleId) {
+    public UserDTO(String username, String name, String address, String email, String password, int roleId) {
         this.username = username;
         this.name = name;
+        this.address = address;
         this.email = email;
         this.password = password;
         this.roleId = roleId;
     }
 
-    public UserDTO(Integer id, String username, String name, String email, String password, int roleId) {
+    public UserDTO(Integer id, String username, String name, String address, String email, String password, int roleId) {
         this.id = id;
         this.name = name;
+        this.address = address;
         this.email = email;
         this.password = password;
         this.roleId = roleId;
@@ -33,6 +36,7 @@ public class UserDTO {
         this.id = user.getId();
         this.username = user.getUsername();
         this.name = user.getName();
+        this.address = user.getAddress();
         this.email = user.getEmail();
         this.password = user.getPassword();
         this.roleId = user.getRoleId();
@@ -60,6 +64,14 @@ public class UserDTO {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public String getEmail() {

@@ -48,6 +48,9 @@ public class UserServiceImpl implements UserService {
         if (userDTO.getName() != null) {
             user.setName(userDTO.getName());
         }
+        if (userDTO.getAddress() != null) {
+            user.setAddress(userDTO.getAddress());
+        }
         if (userDTO.getEmail() != null) {
             user.setEmail(userDTO.getEmail());
         }
@@ -67,39 +70,6 @@ public class UserServiceImpl implements UserService {
         userRepository.deleteById(id);
     }
 
-    /*@Transactional
-    @Override
-    public void enrollMateria(Integer cedulaAlumno, Short codigoMateria) {
-        Alumno alumno = alumnoRepository.findById(cedulaAlumno)
-                .orElseThrow(() -> new RuntimeException("Alumno not found with cedula: " + cedulaAlumno));
-        Materia materia = materiaRepository.findById(codigoMateria)
-                .orElseThrow(() -> new RuntimeException("Materia not found with codigo: " + codigoMateria));
-        alumno.getMaterias().add(materia);
-        alumnoRepository.save(alumno);
-    }
-
-    @Transactional
-    @Override
-    public void unenrollMateria(Integer cedulaAlumno, Short codigoMateria) {
-        Alumno alumno = alumnoRepository.findById(cedulaAlumno)
-                .orElseThrow(() -> new RuntimeException("Alumno not found with cedula: " + cedulaAlumno));
-        Materia materia = materiaRepository.findById(codigoMateria)
-                .orElseThrow(() -> new RuntimeException("Materia not found with codigo: " + codigoMateria));
-        alumno.getMaterias().remove(materia);
-        alumnoRepository.save(alumno);
-    }
-
-    @Transactional(readOnly = true)
-    @Override
-    public List<MateriaDTO> findMateriasByAlumno(Integer cedulaAlumno) {
-        Alumno alumno = alumnoRepository.findById(cedulaAlumno)
-                .orElseThrow(() -> new RuntimeException("Alumno not found with cedula: " + cedulaAlumno));
-
-        return alumno.getMaterias().stream()
-                .map(materia -> new MateriaDTO(materia))
-                .collect(Collectors.toList());
-    }*/
-
     private UserDTO convertToDTO(User user) {
         return new UserDTO(user);
     }
@@ -109,6 +79,7 @@ public class UserServiceImpl implements UserService {
         user.setId(userDTO.getId());
         user.setUsername(userDTO.getUsername());
         user.setName(userDTO.getName());
+        user.setAddress(userDTO.getAddress());
         user.setEmail(userDTO.getEmail());
         user.setPassword(userDTO.getPassword());
         user.setRoleId(userDTO.getRoleId());

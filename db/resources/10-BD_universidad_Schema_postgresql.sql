@@ -14,6 +14,7 @@ CREATE TABLE users (
     uniqueid SERIAL PRIMARY KEY,
     username VARCHAR(50) NOT NULL UNIQUE,
     name VARCHAR(100) NOT NULL,
+    address TEXT NOT NULL,
     email VARCHAR(100) NOT NULL UNIQUE,
     password VARCHAR(50) NOT NULL,
     roleid INTEGER NOT NULL,
