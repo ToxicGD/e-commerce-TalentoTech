@@ -18,9 +18,9 @@ public class CartController {
 
     // Endpoint for creating a new cart item
     @PostMapping
-    public ResponseEntity<CartDTO> createCart(@RequestBody CartDTO cartDTO) {
-        CartDTO createdCart = cartService.save(cartDTO);
-        return new ResponseEntity<>(createdCart, HttpStatus.CREATED);
+    public ResponseEntity<List<CartDTO>> createCart(@RequestBody CartDTO cartDTO) {
+        List<CartDTO> createdItems = cartService.saveAll(cartDTO);
+        return new ResponseEntity<>(createdItems, HttpStatus.CREATED);
     }
     
     // Endpoint for getting all cart items

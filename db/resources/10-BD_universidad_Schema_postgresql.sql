@@ -50,11 +50,9 @@ CREATE TABLE cart (
 -- Creación de la tabla Orders
 CREATE TABLE orders (
     orderid SERIAL PRIMARY KEY,
-    productid INTEGER NOT NULL,
     cartid INTEGER NOT NULL,
     deliveryid INTEGER NOT NULL,
     orderdate TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    estimateddeliverydate DATE,
     CONSTRAINT FK_Orders_Product FOREIGN KEY (productId) REFERENCES products(productId),
     CONSTRAINT FK_Orders_Cart FOREIGN KEY (cartid) REFERENCES cart(cartid),
     CONSTRAINT FK_Orders_Delivery FOREIGN KEY (deliveryid) REFERENCES delivery(deliveryid)

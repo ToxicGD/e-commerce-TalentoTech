@@ -1,6 +1,7 @@
 package co.edu.udea.talentotech.programacion.intermedio.api_rest.services.impl;
 
 import co.edu.udea.talentotech.programacion.intermedio.api_rest.dto.CartDTO;
+import co.edu.udea.talentotech.programacion.intermedio.api_rest.dto.CartItemDTO;
 import co.edu.udea.talentotech.programacion.intermedio.api_rest.entities.Cart;
 import co.edu.udea.talentotech.programacion.intermedio.api_rest.entities.Product;
 import co.edu.udea.talentotech.programacion.intermedio.api_rest.repositories.CartRepository;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -32,51 +34,39 @@ public class CartServiceImpl implements CartService {
                     .collect(Collectors.toList());
     }
 
-    @Transactional
     @Override
+    @Transactional
     public CartDTO save(CartDTO cartDTO) {
-        // Find the product to get its price
-        Product product = productRepository.findById(cartDTO.getProductId())
-                .orElseThrow(() -> new RuntimeException("Product not found with ID: " + cartDTO.getProductId()));
-        
-        // Use BigDecimal for precise calculations
-        BigDecimal productPrice = BigDecimal.valueOf(product.getPrice());
-        BigDecimal quantity = BigDecimal.valueOf(cartDTO.getQuantity());
-        BigDecimal subTotal = productPrice.multiply(quantity);
-
-        // Create the new Cart entity
-        Cart newCart = new Cart();
-        newCart.setProductId(cartDTO.getProductId());
-        newCart.setQuantity(cartDTO.getQuantity());
-        newCart.setSubTotal(subTotal);
-        
-        // Save the entity and return the DTO
-        Cart savedCart = cartRepository.save(newCart);
-        return convertToDTO(savedCart);
+        List<CartDTO> resultList = saveAll(cartDTO);
+        return resultList.isEmpty() ? null : resultList.get(0); // return just the first
     }
 
-    @Transactional
     @Override
+    @Transactional
     public CartDTO update(Integer id, CartDTO cartDTO) {
+        if (cartDTO.getItems() == null || cartDTO.getItems().isEmpty()) {
+            throw new RuntimeException("CartDTO must contain at least one item to update.");
+        }
+
+        CartItemDTO item = cartDTO.getItems().get(0); // only update first item
+
         Cart cart = cartRepository.findById(id.longValue())
                 .orElseThrow(() -> new RuntimeException("Cart not found with id: " + id));
 
-        // Update product if the DTO provides a new one
-        if (cartDTO.getProductId() != null && !cart.getProductId().equals(cartDTO.getProductId())) {
-            Product product = productRepository.findById(cartDTO.getProductId())
-                .orElseThrow(() -> new RuntimeException("Product not found with ID: " + cartDTO.getProductId()));
+        if (!cart.getProductId().equals(item.getProductId())) {
+            Product product = productRepository.findById(item.getProductId())
+                .orElseThrow(() -> new RuntimeException("Product not found with ID: " + item.getProductId()));
             cart.setProductId(product.getProductId());
         }
 
-        // Update quantity if the DTO provides a new one
-        if (cartDTO.getQuantity() != null) {
-            cart.setQuantity(cartDTO.getQuantity());
+        if (item.getQuantity() != null) {
+            cart.setQuantity(item.getQuantity());
         }
 
-        // Recalculate subtotal after updates
+        // Recalculate subtotal
         Product updatedProduct = productRepository.findById(cart.getProductId())
             .orElseThrow(() -> new RuntimeException("Product not found with ID: " + cart.getProductId()));
-        
+
         BigDecimal updatedPrice = BigDecimal.valueOf(updatedProduct.getPrice());
         BigDecimal updatedQuantity = BigDecimal.valueOf(cart.getQuantity());
         cart.setSubTotal(updatedPrice.multiply(updatedQuantity));
@@ -84,22 +74,53 @@ public class CartServiceImpl implements CartService {
         Cart updatedCart = cartRepository.save(cart);
         return convertToDTO(updatedCart);
     }
-
     @Transactional
     @Override
     public void delete(Integer id) {
         cartRepository.deleteById(id.longValue());
+    }
+
+    @Override
+    @Transactional
+    public List<CartDTO> saveAll(CartDTO cartDTO) {
+        List<CartDTO> savedItems = new ArrayList<>();
+
+        for (CartItemDTO item : cartDTO.getItems()) {
+            Product product = productRepository.findById(item.getProductId())
+                .orElseThrow(() -> new RuntimeException("Product not found: " + item.getProductId()));
+
+            BigDecimal productPrice = BigDecimal.valueOf(product.getPrice());
+            BigDecimal quantity = BigDecimal.valueOf(item.getQuantity());
+            BigDecimal subTotal = productPrice.multiply(quantity);
+
+            Cart newCart = new Cart();
+            newCart.setProductId(item.getProductId());
+            newCart.setQuantity(item.getQuantity());
+            newCart.setSubTotal(subTotal);
+
+            Cart saved = cartRepository.save(newCart);
+            savedItems.add(convertToDTO(saved));
+        }
+
+        return savedItems;
     }
     
     /**
      * Converts a Cart entity to a CartDTO.
      */
     private CartDTO convertToDTO(Cart cart) {
+        CartItemDTO item = new CartItemDTO();
+        item.setProductId(cart.getProductId());
+        item.setQuantity(cart.getQuantity());
+        item.setSubTotal(cart.getSubTotal());
+
+        List<CartItemDTO> itemList = new ArrayList<>();
+        itemList.add(item);
+
         CartDTO dto = new CartDTO();
         dto.setCartId(cart.getCartId());
-        dto.setProductId(cart.getProductId());
-        dto.setSubTotal(cart.getSubTotal());
-        dto.setQuantity(cart.getQuantity());
+        dto.setItems(itemList);
+
         return dto;
     }
 }
