@@ -21,22 +21,9 @@ public class Product {
     @Column(name = "description", length = 500)
     private String description;
 
-    // @NotBlank
-    // @Size(max = 30)
-    /*@Column(name = "image", nullable = false, length = 500)
-    private String image;*/
-
-    // @Size(max = 30)
     @Column(name = "price", length = 30)
     private double price;
 
-    /*@ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(
-        name = "alumno_materia",
-        joinColumns = @JoinColumn(name = "cc_alumno"),
-        inverseJoinColumns = @JoinColumn(name = "codigo_materia")
-    )
-    private Set<Materia> materias;*/
 
     // Constructors
     public Product() {}

@@ -1,0 +1,60 @@
+@SERVER=localhost
+@PORT=8080
+@BASE_URL=http://{{SERVER}}:{{PORT}}
+
+### ============ ENDPOINTS ============
+
+### Listar todos los usuarios
+GET {{BASE_URL}}/users HTTP/1.1
+
+### Usar parámetro de consulta para limitar cantidad de resultados
+GET {{BASE_URL}}/users?limit=2&offset=2 HTTP/1.1
+
+### Listar todos los productos
+GET {{BASE_URL}}/api/products HTTP/1.1
+
+### Listar todos los carritos
+GET {{BASE_URL}}/api/cart HTTP/1.1
+
+### Crear un nuevo producto
+POST {{BASE_URL}}/api/products HTTP/1.1
+Content-Type: application/json
+
+{
+    "productId": 5,
+    "name": "Hulk",
+    "description": "SMASH!",
+    "price": 120000
+}
+
+### Crear un nuevo usuario
+POST {{BASE_URL}}/users HTTP/1.1
+Content-Type: application/json
+
+{
+    "username": "Rubia69",
+    "name": "Kakaroto Vegito",
+    "email": "vicioso48@yahoo.com",
+    "password": "dickXXX69",
+    "roleId": 2
+}
+
+### Crear un nuevo delivery
+POST {{BASE_URL}}/delivery HTTP/1.1
+Content-Type: application/json
+
+{
+    "userId": 1,
+    "address": "Carrera 50X 70 61, Prado, Medellín",
+    "zipCode": 50032,
+    "phoneNumber": "3154129040"
+}
+
+### Crear un nuevo carrito (con productId y quantity only)
+POST {{BASE_URL}}/api/cart HTTP/1.1
+Content-Type: application/json
+
+{
+    "productId": 3,
+    "quantity": 50
+}
