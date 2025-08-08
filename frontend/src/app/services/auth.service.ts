@@ -1,4 +1,3 @@
-// src/app/services/auth.service.ts (actualizado)
 import { Injectable, signal, computed } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
@@ -10,7 +9,7 @@ import { LoginCredentials, UserResponse } from '../models/user.interface';
 })
 export class AuthService {
   private currentUserSignal = signal<UserResponse | null>(null);
-  
+
   public currentUser = this.currentUserSignal.asReadonly();
   public isLoggedIn = computed(() => this.currentUserSignal() !== null);
   public isAdmin = computed(() => {
@@ -27,7 +26,7 @@ export class AuthService {
     return this.userService.getAllUsers().pipe(
       map(users => {
         const user = users.find(u => u.email === credentials.email);
-        
+
         if (user) {
           // En un sistema real, validarías la contraseña en el backend
           // Por ahora, simplemente aceptamos cualquier contraseña no vacía
@@ -58,6 +57,7 @@ export class AuthService {
   }
 
   private loadStoredUser(): void {
+    console.log(window)
     const storedUser = localStorage.getItem('currentUser');
     if (storedUser) {
       try {

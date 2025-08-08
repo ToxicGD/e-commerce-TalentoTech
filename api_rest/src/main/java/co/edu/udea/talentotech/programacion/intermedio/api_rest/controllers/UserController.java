@@ -3,6 +3,7 @@ package co.edu.udea.talentotech.programacion.intermedio.api_rest.controllers;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,6 +17,7 @@ import co.edu.udea.talentotech.programacion.intermedio.api_rest.dto.UserDTO;
 import co.edu.udea.talentotech.programacion.intermedio.api_rest.entities.User;
 
 @RestController
+@CrossOrigin(origins = "*")
 public class UserController {
 
     private List<User> users = new ArrayList<>();

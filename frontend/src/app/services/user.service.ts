@@ -30,26 +30,6 @@ export class UserService {
   getAllUsers(params?: UserListParams): Observable<UserResponse[]> {
     let httpParams = new HttpParams();
 
-    // Configurar parámetros por defecto basados en tu controlador
-    if (params?.limit !== undefined) {
-      httpParams = httpParams.set('limit', params.limit.toString());
-    } else {
-      httpParams = httpParams.set('limit', '10'); // Default del backend
-    }
-
-    if (params?.offset !== undefined) {
-      httpParams = httpParams.set('offset', params.offset.toString());
-    } else {
-      httpParams = httpParams.set('offset', '0'); // Default del backend
-    }
-
-    if (params?.order) {
-      httpParams = httpParams.set('order', params.order);
-    }
-
-    if (params?.sort) {
-      httpParams = httpParams.set('sort', params.sort);
-    }
 
     return this.http.get<UserResponse[]>(`${this.baseUrl}/users`, { params: httpParams })
       .pipe(
