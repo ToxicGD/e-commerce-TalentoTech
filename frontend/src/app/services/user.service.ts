@@ -1,52 +1,52 @@
-import { Injectable } from '@angular/core';
+import { Injectable, signal, computed } from '@angular/core';
 import { HttpClient, HttpParams, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 
 
-import { 
-  User, 
-  CreateUserRequest, 
-  UpdateUserRequest, 
-  UserResponse, 
-  UserListParams 
+import {
+  User,
+  CreateUserRequest,
+  UpdateUserRequest,
+  UserResponse,
+  UserListParams
 } from '../models/user.interface';
 
 @Injectable({
   providedIn: 'root'
 })
-  
+
 export class UserService {
   private baseUrl = 'http://localhost:8080';
-  
+
   // Signal para mantener la lista de usuarios
   private usersSignal = signal<UserResponse[]>([]);
   public users = this.usersSignal.asReadonly();
   public totalUsers = computed(() => this.usersSignal().length);
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   // GET /users - Obtener todos los usuarios con parámetros opcionales
   getAllUsers(params?: UserListParams): Observable<UserResponse[]> {
     let httpParams = new HttpParams();
-    
+
     // Configurar parámetros por defecto basados en tu controlador
     if (params?.limit !== undefined) {
       httpParams = httpParams.set('limit', params.limit.toString());
     } else {
       httpParams = httpParams.set('limit', '10'); // Default del backend
     }
-    
+
     if (params?.offset !== undefined) {
       httpParams = httpParams.set('offset', params.offset.toString());
     } else {
       httpParams = httpParams.set('offset', '0'); // Default del backend
     }
-    
+
     if (params?.order) {
       httpParams = httpParams.set('order', params.order);
     }
-    
+
     if (params?.sort) {
       httpParams = httpParams.set('sort', params.sort);
     }
@@ -89,7 +89,7 @@ export class UserService {
       .pipe(
         map(updatedUser => {
           // Actualizar signal local
-          this.usersSignal.update(currentUsers => 
+          this.usersSignal.update(currentUsers =>
             currentUsers.map(u => u.id === id ? updatedUser : u)
           );
           return updatedUser;
@@ -104,7 +104,7 @@ export class UserService {
       .pipe(
         map(response => {
           // Remover del signal local
-          this.usersSignal.update(currentUsers => 
+          this.usersSignal.update(currentUsers =>
             currentUsers.filter(u => u.id !== id)
           );
           return response;
