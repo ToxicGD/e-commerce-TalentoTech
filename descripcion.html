@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dados y Pinceles — Esculturas en 3D y creatividad</title>
+  <style>
+    :root{--accent:#6b4eff;--bg:#f7f7fb;--card:#ffffff;--muted:#6b6b7a}
+    body{font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; margin:0; background:var(--bg); color:#222}
+    header{background:linear-gradient(90deg, rgba(107,78,255,0.12), rgba(255,196,0,0.06)); padding:3rem 1rem; text-align:center}
+    .container{max-width:1000px;margin:0 auto;padding:1rem}
+    h1{margin:0;font-size:2rem;color:var(--accent)}
+    p.lead{margin:.5rem 0 1.2rem;color:var(--muted)}
+    .grid{display:grid;grid-template-columns:1fr;gap:1rem}
+    @media(min-width:800px){.grid{grid-template-columns:1fr 1fr}}
+    .card{background:var(--card);border-radius:12px;padding:1.25rem;box-shadow:0 6px 18px rgba(20,20,50,0.06)}
+    .services li{margin:.4rem 0}
+    .cta{display:inline-block;margin-top:1rem;padding:.6rem 1rem;border-radius:8px;background:var(--accent);color:#fff;text-decoration:none}
+    footer{margin-top:2rem;padding:1.25rem 0;text-align:center;color:var(--muted);font-size:.9rem}
+    .logo{display:inline-flex;align-items:center;gap:.6rem}
+    .logo .mark{width:48px;height:48px;border-radius:8px;background:linear-gradient(135deg,#6b4eff,#ffbe3d);display:inline-flex;align-items:center;justify-content:center;color:#fff;font-weight:700}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <div class="logo">
+        <div class="mark">D&amp;P</div>
+        <div>
+          <h1>Dados y Pinceles</h1>
+          <p class="lead">Esculturas con impresión 3D y productos creativos únicos para jugadores, artistas y coleccionistas.</p>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="grid" aria-label="Descripción y servicios">
+      <div class="card">
+        <h2>Quiénes somos</h2>
+        <p>
+          Somos <strong>Dados y Pinceles</strong>, una empresa especializada en la creación de esculturas únicas mediante impresión 3D. Fusionamos tecnología y arte para ofrecer piezas personalizadas que capturan la imaginación y embellecen cualquier espacio.
+        </p>
+        <p>
+          Nuestro trabajo combina la precisión de la fabricación digital con acabados artísticos hechos a mano, logrando resultados de alta calidad tanto para coleccionistas como para proyectos especiales.
+        </p>
+      </div>
+
+      <div class="card">
+        <h2>Qué hacemos</h2>
+        <ul class="services">
+          <li><strong>Esculturas 3D personalizadas:</strong> Diseños únicos para decoración, regalos y coleccionismo.</li>
+          <li><strong>Modelado y prototipado:</strong> Creación de modelos digitales y prototipos a medida.</li>
+          <li><strong>Acabados artísticos:</strong> Pintura, patinado y detalles a mano para realzar cada pieza.</li>
+          <li><strong>Comunidad creativa:</strong> Talleres de modelado 3D, pintura y personalización.</li>
+        </ul>
+        <a class="cta" href="#contacto">Contáctanos</a>
+      </div>
+    </section>
+
+    <section style="margin-top:1rem;" class="card">
+      <h2>Nuestro enfoque</h2>
+      <p>
+        Creemos en la fusión entre tecnología y arte. Usamos materiales de alta calidad y apoyamos la producción local. Cada escultura pasa por un proceso de diseño, impresión y acabado que garantiza durabilidad y belleza.
+      </p>
+    </section>
+
+    <section id="contacto" class="card" style="margin-top:1rem;display:flex;flex-direction:column;gap:.6rem">
+      <h2>Contacto</h2>
+      <p>Visítanos en nuestra tienda-taller o escríbenos para encargar tu escultura personalizada:</p>
+      <p><strong>Dirección:</strong>Medellín, Ciudad Creativa, Tienda Virtual</p>
+      <p><strong>Email:</strong> ventasycapacitaciones@dadosypinceles.com · <strong>Tel:</strong> +57 3237845661</p>
+      <p style="margin-top:.6rem;color:var(--muted)">Horario: Lun–Sáb 10:00 A.M –6:30 P.M</p>
+    </section>
+
+  </main>
+
+  <footer>
+    © <span id="year"></span> Dados y Pinceles — Esculturas y arte en 3D.
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
