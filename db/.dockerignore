@@ -1,0 +1,19 @@
+# Exclude compiled classes and binaries
+bin/
+*.class
+
+# Exclude documentation and text files
+*.md
+*.txt
+
+# Exclude IDE files
+.vscode/
+.idea/
+*.iml
+
+# Exclude version control
+.git/
+.gitignore
+
+# Keep lib directory with JDBC drivers
+!lib/
